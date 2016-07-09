@@ -18,6 +18,7 @@ best <- function(state, outcome) {
         
         stop("invalid outcome")
     
+    
     ## select the colomn to be used
     
     colNumSelector <- function(my_outcome){
