@@ -1,8 +1,5 @@
 best <- function(state, outcome) {
     
-    bestHospital = character()
-    
-    
     ## Read outcome data
     outcome_df <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
     
@@ -12,7 +9,6 @@ best <- function(state, outcome) {
     if(!is.element(state, outcome_df$State))
         
         stop("invalid state")
-    
     
     if (outcome != "heart attack" && outcome != "heart failure" && outcome != "pneumonia")
         
