@@ -17,14 +17,14 @@ best <- function(state, outcome) {
     
     ## select the colomn to be used
     
-    colNumSelector <- function(my_outcome){
-        if (outcome == "heart attack")
+    colNumSelector <- function(l_outcome){
+        if (l_outcome == "heart attack")
             return(11)
         
-        if (outcome == "heart failure")
+        if (l_outcome == "heart failure")
             return(17)
         
-        if (outcome == "pneumonia")
+        if (l_outcome == "pneumonia")
             return(23)
     }
     
