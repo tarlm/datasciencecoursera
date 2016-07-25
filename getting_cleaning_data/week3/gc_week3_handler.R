@@ -46,3 +46,12 @@ str(restData)
 
 quantile(restData$councilDistrict, na.rm = TRUE)
 quantile(restData$councilDistrict, probs = c(0.5, 0.75, 0.9))
+table(restData$zipCode, useNA = "ifany")
+table(restData$councilDistrict, restData$zipCode)
+
+# Check for missing values
+sum(is.na(restData$councilDistrict))
+
+any(is.na(restData$councilDistrict))
+
+all(restData$zipCode > 0)
