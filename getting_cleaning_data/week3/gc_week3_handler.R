@@ -66,3 +66,9 @@ table(restData$zipCode %in% c("21212", "21213")) # all the zipcode equal "21212"
 restData[restData$zipCode %in% c("21212", "21213"),]
 
 ######## Chap3: Creating New Variables ########
+# downlad and load the restaurant dataset as in the previous module
+
+# create sequences // there are three way of creatins sequences
+s1 <- seq(1, 10, by=2); s1
+s2 <- seq(1, 10, length=3); s2
+x <- c(1,3,8,25,100); seq(along = x)
