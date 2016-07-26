@@ -18,7 +18,7 @@
 # https://data.baltimorecity.gov/api/views/k5ry-ef3g/rows.csv?accessType=DOWNLOAD  
 # 
 
-setwd("C:/Users/VV5193/Local/Data/DevSpace/RSpace/datasciencecoursera/getting_cleaning_data/week3/")
+setwd("./getting_cleaning_data/week3/")
 
 # Getting data from the web
 
@@ -29,9 +29,9 @@ if(!file.exists("./data")){
 
 fileUrl <- "https://data.baltimorecity.gov/api/views/k5ry-ef3g/rows.csv?accessType=DOWNLOAD"
 
-# method = "libcurl" for windows machine
+# method = "libcurl" or "wininet" for windows machine
 #download.file(fileUrl, destfile = "./data/restaurants.csv", method = "curl")
-download.file(fileUrl, destfile = "./data/restaurants.csv", method = "libcurl")
+download.file(fileUrl, destfile = "./data/restaurants.csv", method = "wininet")
 
 restData <- read.csv("./data/restaurants.csv")
 
@@ -54,4 +54,15 @@ sum(is.na(restData$councilDistrict))
 
 any(is.na(restData$councilDistrict))
 
-all(restData$zipCode > 0)
+all(restData$zipCode > 0) # look if every sigle value satisfy the condition. 
+
+colSums(is.na(restData)) # Sum NA value by column
+all(colSums(is.na(restData)) ==0 )
+
+table(restData$zipCode %in% c("21212")) # are there any zipcode equals "21212"
+
+table(restData$zipCode %in% c("21212", "21213")) # all the zipcode equal "21212" or "21213"
+
+restData[restData$zipCode %in% c("21212", "21213"),]
+
+######## Chap3: Creating New Variables ########
