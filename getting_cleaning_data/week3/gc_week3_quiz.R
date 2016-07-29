@@ -57,7 +57,7 @@ which(agricultureLogical)
 
 jpeg_url ="https://d396qusza40orc.cloudfront.net/getdata%2Fjeff.jpg"
 
-jpeg_data <- 
+jpeg_data <- jpeg(jpeg())
 
 
 
