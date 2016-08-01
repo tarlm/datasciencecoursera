@@ -23,6 +23,6 @@ And the open database page is: <http://genome.ucsc.edu/goldenPath/help/mysql.htm
 ## R Reading from HDF5
 
 You can also embed plots, for example:
-`
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
