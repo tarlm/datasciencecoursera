@@ -1,5 +1,5 @@
 #################################################################################
-# title: "gc_week3_quiz"
+# title: "gc_week4_quiz"
 # author: "Rodrigue ADOUHOUEKONOU"
 # descruption: "Script used to handle the quiz of getting and cleaning data module of week 3"
 # date: "28 juillet 2016"
