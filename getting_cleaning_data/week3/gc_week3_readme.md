@@ -5,6 +5,11 @@ date: "21 juillet 2016"
 output: html_document
 ---
 
+if working behind a proxy / firewall user this 
+library(httr)
+set_config(use_proxy(url="proxy.xxxx.com", port=80, username="user",password="password"))
+
+
 ```{r setup, include=FALSE}
 include code here if needed
 ```
