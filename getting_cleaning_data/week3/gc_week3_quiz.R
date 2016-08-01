@@ -6,6 +6,7 @@
 #################################################################################
 
 require(dplyr)
+require(data.table)
 require(jpeg) # install 'jpeg' package if needed
 
 setwd("./getting_cleaning_data/week3/") # first set my working directory
@@ -55,21 +56,62 @@ which(agricultureLogical)
 
 ##### Question 2: Handle Jpeg file  ##### 
 
-jpeg_url ="https://d396qusza40orc.cloudfront.net/getdata%2Fjeff.jpg"
+jpeg_url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fjeff.jpg"
+file_path <- file.path(getwd(), "data/getdatajeff.jpg")
+download.file(jpeg_url, file_path, mode = "wb" , method = "libcurl")
 
-jpeg_data <- jpeg(jpeg())
+img_data <- readJPEG(file_path, native = TRUE)
+
+## The result is -15259150 -10575416 
+quantile(img_data, probs = c(0.3, 0.8))
 
 
+##### Question 3: Handle CSVs file  ##### 
+
+fgdp_url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FGDP.csv"
+fgdp_path <- file.path(getwd(), "data/Fgdp.csv")
+download.file(fgdp_url, fgdp_path, mode = "wb" , method = "libcurl")
 
 
+fedStat_url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FEDSTATS_Country.csv"
+fedStat_path <- file.path(getwd(), "data/fed_stats.csv")
+download.file(fedStat_url, fedStat_path, mode = "wb" , method = "libcurl")
 
+# load the csv files into data frame
+fgdp_df <- fread(fgdp_path, skip = 5, header = FALSE, nrows = 190, select = c(1, 2, 4, 5), 
+                 col.names = c("CountryCode", "Rank", "Economy", "Total"))
+
+fedStat_df <- read.csv(fedStat_path)
+
+# look at a bit of the data 
+head(fgdp_df, n = 10)
+head(fedStat_df, n = 10)
+summary(fgdp_df)
+summary(fedStat_df)
 # Check for missing values
+#colSums(is.na(fgdp_df)) # Sum NA value by column
+# colSums(is.na(fedStat_df)) # Sum NA value by column
 
-colSums(is.na(restData)) # Sum NA value by column
-all(colSums(is.na(restData)) ==0 )
+matched_table <- merge(fgdp_df, fedStat_df, by = 'CountryCode')
 
-table(restData$zipCode %in% c("21212")) # are there any zipcode equals "21212"
+# number of matched rows ==> 189
+NROW(matched_table)
 
-table(restData$zipCode %in% c("21212", "21213")) # all the zipcode equal "21212" or "21213"
+# arrange by descend order of rank
+matched_table <- matched_table %>% 
+    arrange(desc(Rank))
+# 13 th country is St. Kitts and Nevis
+matched_table[13,]
 
-restData[restData$zipCode %in% c("21212", "21213"),]
+##### Question 4: handle mean by Income.Group  ##### 
+# High income: OECD = 32.96667, High income: nonOECD = 91.91304
+tapply(matched_table$Rank, matched_table$Income.Group, mean)
+
+quantile_grps <- quantile(matched_table$Rank, na.rm = TRUE)
+
+##### Question 5: cut into five groups and group by Income.Group  ##### 
+
+matched_table$RankGroups <- cut(matched_table$Rank, breaks = 5)
+
+# the answer is 5
+table(matched_table$RankGroups, matched_table$Income.Group)
