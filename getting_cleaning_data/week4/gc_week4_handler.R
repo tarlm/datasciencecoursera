@@ -26,15 +26,9 @@ if(!file.exists("./data")){
 # https://data.baltimorecity.gov/api/views/k5ry-ef3g/rows.csv?accessType=DOWNLOAD  
 # 
 
-fileUrl <- "https://data.baltimorecity.gov/api/views/k5ry-ef3g/rows.csv?accessType=DOWNLOAD"
-file_path <- file.path(getwd(), "data/getdatajeff.jpg")
-download.file(jpeg_url, file_path, mode = "wb" , method = "libcurl")
+#fileUrl <- "https://data.baltimorecity.gov/api/views/k5ry-ef3g/rows.csv?accessType=DOWNLOAD"
+#file_path <- file.path(getwd(), "data/getdatajeff.jpg")
 
-# method = "libcurl" or "wininet" for windows machine
-#download.file(fileUrl, destfile = "./data/restaurants.csv", method = "curl")
-download.file(fileUrl, destfile = "./data/restaurants.csv", method = "wininet")
-
-restData <- read.csv("./data/restaurants.csv")
 
 
 # Check for missing values
