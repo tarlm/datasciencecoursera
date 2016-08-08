@@ -25,7 +25,7 @@ data_fld_path <- file.path(getwd(), "data/")
 
 zip_filename<- file.path(data_fld_path, "files_FUCI_HAR_Dataset.zip") # set file_path on system
 
-# Download this zip file if not exist already. The goal is to not download again
+# Download the zip file if not exist already. The goal is to not download again
 if(!file.exists(zip_filename)){
     file_url <- 
         "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
