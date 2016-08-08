@@ -97,7 +97,7 @@ full_data <- cbind(subject_full_data, y_full_data, x_full_data)
 # Step4. Appropriately labels the data set with descriptive variable names.
 ###############################################################################
 
-names(full_data) <- c( "subject", "activity", features[needed_features,2])
+names(full_data) <- c( "subject", "activity", gsub("(\\(\\)-|\\(\\)|-)", "", features[needed_features,2]))
 
 # View the final data set with appropriate labels
 View(full_data)
